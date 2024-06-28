@@ -1,0 +1,17 @@
+//COLORS styles
+
+ //Colors best be placed with a background-color:
+$colorLightOne: #FFFFFF;
+$colorLightTwo:  #D8D8D8;
+
+$colorDarkOne: #000000;
+$colorDarkTwo: #111111;
+
+$colorSecondary: rgb(136, 208, 232);
+$colorTertiary: #F5A327;
+
+ //Gradients must be placed with a background-image:
+$colorGradientLight: linear-gradient(to left, $colorLightOne, $colorLightTwo);
+$colorGradientDark: linear-gradient(to left, $colorDarkOne, $colorDarkTwo);
+
+$colorGradientLightSecondary: linear-gradient(to left, $colorLightOne, $colorSecondary);

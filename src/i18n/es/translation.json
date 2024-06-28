@@ -1,0 +1,12 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "menu": "Menu"
+  },
+  "home": {
+    "intro": {
+      "title": "Título en la página de inicio",
+      "paragraph": "Párrafo en la página de inicio"
+    }
+  }
+}

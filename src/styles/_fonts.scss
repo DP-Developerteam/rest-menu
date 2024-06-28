@@ -1,0 +1,17 @@
+//FONTS styles
+
+//Import and change font family.
+
+@mixin font ($size, $weight, $color) {
+    font-family: sans-serif;
+    font-size: $size;
+    font-weight: $weight;
+    color: $color;
+}
+
+@mixin fontSecondary ($size, $weight, $color) {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: $size;
+    font-weight: $weight;
+    color: $color;
+}

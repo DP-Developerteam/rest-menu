@@ -1,0 +1,39 @@
+//HELPERs styles
+
+@mixin displayFlex ($flow, $justify, $align) {
+    display: flex;
+    flex-flow: $flow;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+@mixin gap ($space) {
+    height: $space;
+    width: $space;
+}
+
+@mixin button ($background, $color) {
+    @include displayFlex(row nowrap, center, center);
+    @include hoverPointer();
+    padding: 0.3rem 1rem;
+    background-color: $background;
+    color: $color;
+    border-radius: 0.3rem;
+}
+
+@mixin buttonBorder ($background, $color, $border) {
+    @include displayFlex(row nowrap, center, center);
+    @include hoverPointer();
+    padding: 0.3rem 1rem;
+    background-color: $background;
+    color: $color;
+    border-radius: 0.3rem;
+    border: solid 0.1rem;
+    border-color: $border;
+}
+
+@mixin hoverPointer() {
+    &:not([disabled]):hover {
+        cursor: pointer;
+    }
+}

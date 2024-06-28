@@ -1,0 +1,12 @@
+{
+  "nav": {
+    "home": "Home",
+    "menu": "Menu"
+  },
+  "home": {
+    "intro": {
+      "title": "Title in homepage",
+      "paragraph": "Paragraph in homepage"
+    }
+  }
+}

@@ -1,0 +1,62 @@
+@import '../App.scss';
+
+.scrollTop {
+    position: fixed;
+    bottom: 60px;
+    right: 0;
+    z-index: 95;
+    @include button($colorTertiary, $colorLightOne);
+    border-radius: 5px 0 0 5px;
+    padding: 5px 15px 5px 5px;
+    .icon {
+        width: 24px;
+    }
+} //scrollTop
+
+.header {
+    @include  displayFlex(row wrap, center, center);
+    position: fixed;
+    top: 0;
+    z-index: 90;
+    width: 100%;
+    height: 60px;
+    background-color: $colorDarkTwo;
+    @include font(16px, 400, $colorTertiary);
+    .tabsContainer {
+        @include  displayFlex(row wrap, center, center);
+        .tab {
+            @include hoverPointer();
+            // margin: 0 5px;
+        }
+        .clearGap {
+            @include gap(15px);
+        }
+    }
+} //header
+
+.footer {
+    @include  displayFlex(row wrap, center, center);
+    position: fixed;
+    bottom: 0;
+    z-index: 90;
+    width: 100%;
+    height: 40px;
+    background-color: $colorDarkTwo;
+    @include font(16px, 400, $colorTertiary);
+    .tabsContainer {
+        @include  displayFlex(row wrap, center, center);
+        .tab {
+            @include hoverPointer();
+        }
+        .clearGap {
+            @include gap(15px);
+        }
+    }
+    .buttons {
+        @include displayFlex(row wrap, center, center);
+        .button {
+            @include hoverPointer();
+            margin-left: 15px;
+        }
+    }
+} //footer
