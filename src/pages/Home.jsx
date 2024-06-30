@@ -10,7 +10,7 @@ function Home() {
     return (
         <div className='page'>
             <h1>{t('home.intro.title')}</h1>
-            <h1>{t('home.intro.paragraph')}</h1>
+            <p>{t('home.intro.paragraph')}</p>
         </div>
     )
 }

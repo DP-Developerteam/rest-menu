@@ -5,6 +5,11 @@
 
 body{
     background: $colorDarkOne;
-    @include font(1rem, 400, $colorLightOne); //size, weight, color
+    @include font(1rem, 400, $colorLightOne);
     text-transform: uppercase;
+}
+.contentDP {
+    @include displayFlex(column nowrap, center, center);
+    padding: 70px 10px 70px;
+    min-height: 100dvh;
 }

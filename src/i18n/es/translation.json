@@ -1,12 +1,19 @@
 {
   "nav": {
     "home": "Inicio",
-    "menu": "Menu"
+    "menu": "Carta",
+    "drinks": "Bebidas"
   },
   "home": {
     "intro": {
       "title": "Título en la página de inicio",
       "paragraph": "Párrafo en la página de inicio"
+    }
+  },
+  "menu": {
+    "intro": {
+      "title": "Título en la página de la carta",
+      "paragraph": "Párrafo en la página de a carta"
     }
   }
 }

@@ -1,7 +1,12 @@
 @import '../App.scss';
 
 .page {
-    @include displayFlex(column wrap, center, center);
+    @include displayFlex(column nowrap, center, center);
     width: 100%;
-    height: 100dvh;
-}
+    height: 100%;
+    .tab {
+        @include hoverPointer();
+        @include buttonBorder(transparent, $colorLightOne, $colorLightOne);
+        margin: 10px;
+    }
+} //page

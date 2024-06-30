@@ -4,6 +4,8 @@ import RootLayout from './layout/RootLayout.jsx';
 //Pages
 import Home from './pages/Home.jsx';
 import Menu from './pages/Menu.jsx';
+import Drinks from './pages/Drinks.jsx';
+import Foods from './pages/Foods.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -11,6 +13,8 @@ const router = createBrowserRouter(
         <Route index element={<Home />}/>
         <Route path="home" element={<Home />}/>
         <Route path="menu" element={<Menu />}/>
+        <Route path="menu/drinks" element={<Drinks />}/>
+        <Route path="menu/foods" element={<Foods />}/>
     </Route>
   )
 )

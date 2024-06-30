@@ -13,50 +13,119 @@
     }
 } //scrollTop
 
+@keyframes expandMenu {
+    from {
+        clip-path: circle(0% at 100% 0%);
+    }
+    to {
+        clip-path: circle(150% at 100% 0%);
+    }
+}
+
 .header {
-    @include  displayFlex(row wrap, center, center);
+    @include displayFlex(row nowrap, space-between, center);
+    @include font(16px, 400, $colorTertiary);
     position: fixed;
     top: 0;
     z-index: 90;
     width: 100%;
     height: 60px;
+    padding: 0 20px;
     background-color: $colorDarkTwo;
-    @include font(16px, 400, $colorTertiary);
-    .tabsContainer {
-        @include  displayFlex(row wrap, center, center);
-        .tab {
-            @include hoverPointer();
-            // margin: 0 5px;
-        }
-        .clearGap {
-            @include gap(15px);
+    .logo {
+        @include hoverPointer();
+        height: 30px;
+    }
+    .buttonMenu {
+        @include buttonBorder(transparent, $colorLightOne, $colorLightOne);
+        padding: 7px;
+        .icon {
+            width: 28px;
         }
     }
-} //header
+    .navContainer {
+        display: none;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: $colorTertiary;
+        padding: 40px 10px;
+        z-index: 99;
+        &.open {
+            @include displayFlex(column wrap, center, center);
+            animation: expandMenu 1.8s forwards;
+        }
+        .tab {
+            @include hoverPointer();
+            margin: 10px 0;
+            @include font(28px, 400, $colorDarkTwo);
+        }
+        .languagesBox {
+            @include displayFlex(row wrap, center, center);
+            position: absolute;
+            bottom: 10px;
+            .language {
+                @include hoverPointer();
+                @include button($colorLightOne, $colorLightOne);
+                padding: 5px;
+                margin: 10px 5px;
+                width: 36px;
+                .flag {
+                    border-radius: 3px;
+                }
+            }
+        }
+    }
+}
 
 .footer {
-    @include  displayFlex(row wrap, center, center);
+    @include displayFlex(row nowrap, center, center);
     position: fixed;
     bottom: 0;
-    z-index: 90;
     width: 100%;
-    height: 40px;
+    height: 60px;
+    border-radius: 10px 10px 0 0;
     background-color: $colorDarkTwo;
-    @include font(16px, 400, $colorTertiary);
-    .tabsContainer {
-        @include  displayFlex(row wrap, center, center);
+    @include font(16px, 400, $colorLightOne);
+
+    .footerNavContainer {
+        @include displayFlex(row nowrap, flex-start, center);
+        overflow-x: auto;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+
         .tab {
+            @include displayFlex(row nowrap, center, center);
             @include hoverPointer();
+            padding: 10px;
         }
-        .clearGap {
-            @include gap(15px);
+        .icon {
+            height: 28px;
+            margin-right: 5px;
         }
     }
-    .buttons {
+    .scrollButton {
         @include displayFlex(row wrap, center, center);
-        .button {
-            @include hoverPointer();
-            margin-left: 15px;
+        padding: 0 10px;
+        .arrow {
+            width: 15px;
         }
     }
-} //footer
+}
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,38 +1,73 @@
 import './_components.scss'; // Import styles
-import React from 'react'
+import React, { useEffect, useState, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-function Footer() {
+import ArrowLeft from '../assets/img/arrow-left.svg';
+import ArrowRight from '../assets/img/arrow-right.svg';
+import IconHomepage from '../assets/img/home.svg';
+import IconOrderList from '../assets/img/order-list.svg';
 
-    const { t, i18n } = useTranslation();
-    const languages = [
-        { code: "en",  name: "EN"},
-        { code: "es",  name: "ES"},
-        { code: "de",  name: "DE"},
-    ]
+function Footer() {
+    const { t } = useTranslation();
+
+    const footerRef = useRef(null);
+    const [canScrollLeft, setCanScrollLeft] = useState(false);
+    const [canScrollRight, setCanScrollRight] = useState(false);
+
+    const scrollFooter = (direction) => {
+        const footer = footerRef.current;
+        if (direction === 'left') {
+            footer.scrollBy({ left: -100, behavior: 'smooth' });
+        } else {
+            footer.scrollBy({ left: 100, behavior: 'smooth' });
+        }
+    };
+    const checkScroll = () => {
+        const footer = footerRef.current;
+        setCanScrollLeft(footer.scrollLeft > 0);
+        setCanScrollRight(footer.scrollWidth > footer.clientWidth && footer.scrollLeft + footer.clientWidth < footer.scrollWidth);
+    };
+    useEffect(() => {
+        checkScroll();
+        window.addEventListener('resize', checkScroll);
+        return () => {
+            window.removeEventListener('resize', checkScroll);
+        };
+    }, []);
+    useEffect(() => {
+        const footer = footerRef.current;
+        footer.addEventListener('scroll', checkScroll);
+        return () => {
+            footer.removeEventListener('scroll', checkScroll);
+        };
+    }, []);
 
     return (
-        <footer className='footer'>
-            <nav className="tabsContainer">
-                <NavLink className='tab' to='/'>{t('nav.home')}</NavLink>
-                <div class="clearGap"></div>
-                <NavLink className='tab' to='menu'>{t('nav.menu')}</NavLink>
-                <div class="clearGap"></div>
-            </nav>
-            <div className='buttons'>
-                {languages.map(language => (
-                    <button
-                    className='button'
-                    onClick={()=>i18n.changeLanguage(language.code)}
-                    key={language.code}
-                    >
-                    {language.name}
-                    </button>
-                ))}
-            </div>
-        </footer>
-    )
+        <div className="footer">
+            {canScrollLeft && <button className="scrollButton" onClick={() => scrollFooter('left')}>
+                <img className='arrow' src={ArrowLeft} alt='arrow'/>
+            </button>}
+            <footer className='footerNavContainer' ref={footerRef}>
+                <NavLink className='tab' to='/'>
+                    <img className='icon' src={IconHomepage} alt='Order list icon'/>
+                    {/* <p>{t('nav.home')}</p> */}
+                </NavLink>
+                |
+                <NavLink className='tab' to='/menu/foods'>{t('nav.food')}</NavLink>
+                |
+                <NavLink className='tab' to='/menu/drinks'>{t('nav.drinks')}</NavLink>
+                |
+                <NavLink className='tab' to='/menu/drinks'>
+                    <img className='icon' src={IconOrderList} alt='Order list icon'/>
+                    {/* <p>{t('nav.order')}</p> */}
+                </NavLink>
+            </footer>
+            {canScrollRight && <button className="scrollButton" onClick={() => scrollFooter('right')}>
+                <img className='arrow' src={ArrowRight} alt='arrow'/>
+            </button>}
+        </div>
+    );
 }
 
-export default Footer
+export default Footer;

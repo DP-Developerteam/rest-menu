@@ -1,7 +1,8 @@
 {
   "nav": {
     "home": "Startseite",
-    "menu": "Menu"
+    "menu": "Speisekarte",
+    "drinks": "Trinken"
   },
   "home": {
     "intro": {

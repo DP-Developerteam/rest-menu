@@ -8,11 +8,13 @@ import Footer from '../components/Footer';
 
 function RootLayout() {
     return (
-        <div className='rootLayout'>
+        <div className='myDP-RestMenuApp'>
             <ScrollToTop/>
             <BackTopButton />
             <Header />
-            <Outlet />
+            <div className='contentDP'>
+                <Outlet />
+            </div>
             <Footer />
         </div>
     )

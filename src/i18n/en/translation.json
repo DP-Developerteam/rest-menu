@@ -1,7 +1,8 @@
 {
   "nav": {
     "home": "Home",
-    "menu": "Menu"
+    "menu": "Menu",
+    "drinks": "Drinks"
   },
   "home": {
     "intro": {
