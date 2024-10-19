@@ -32,7 +32,7 @@ function BackTopButton() {
         <>
             {showScrollButton && (
                 <button onClick={scrollToTop} className="scrollTop">
-                    <img class='icon' src={ArrowUp} alt='button arrow back to top'/>
+                    <img className='icon' src={ArrowUp} alt='button arrow back to top'/>
                 </button>
             )}
         </>

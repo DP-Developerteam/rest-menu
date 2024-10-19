@@ -54,13 +54,14 @@ function Footer() {
                     {/* <p>{t('nav.home')}</p> */}
                 </NavLink>
                 |
-                <NavLink className='tab' to='/menu/foods'>{t('nav.food')}</NavLink>
+                <NavLink className='tab' to='/menu'>{t('nav.menu')}</NavLink>
+                |
+                {/* <NavLink className='tab' to='/menu/foods'>{t('nav.food')}</NavLink>
                 |
                 <NavLink className='tab' to='/menu/drinks'>{t('nav.drinks')}</NavLink>
-                |
+                | */}
                 <NavLink className='tab' to='/menu/drinks'>
                     <img className='icon' src={IconOrderList} alt='Order list icon'/>
-                    {/* <p>{t('nav.order')}</p> */}
                 </NavLink>
             </footer>
             {canScrollRight && <button className="scrollButton" onClick={() => scrollFooter('right')}>

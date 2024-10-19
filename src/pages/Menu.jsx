@@ -10,8 +10,27 @@ function Menu() {
 
     return (
         <div className='page'>
-            <p>Menu</p>
-            <NavLink className='tab' to='/menu/drinks'>{t('nav.drinks')}</NavLink>
+            <div className='intro'>
+                <h1>{t('menu.intro.title')}</h1>
+                <p>{t('menu.intro.paragraph')}</p>
+            </div>
+            <div className='tabsContainer'>
+                <p className='tab'>
+                    <NavLink className="btnExpand150" to='/menu/foods'>{t('nav.food')}</NavLink>
+                </p>
+                <p className='tab'>
+                    <NavLink className="btnExpand150" to='/menu/drinks'>{t('nav.drinks')}</NavLink>
+                </p>
+                <p className='tab'>
+                    <NavLink className="btnExpand150" to='/menu/foods'>{t('nav.recommendations')}</NavLink>
+                </p>
+                <p className='tab'>
+                    <NavLink className="btnExpand150" to='/menu/drinks'>{t('nav.offers')}</NavLink>
+                </p>
+                <p className='tab'>
+                    <NavLink className="btnExpand150" to='/menu/drinks'>{t('nav.discounts')}</NavLink>
+                </p>
+            </div>
         </div>
     )
 }

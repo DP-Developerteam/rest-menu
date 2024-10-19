@@ -6,6 +6,10 @@ import Home from './pages/Home.jsx';
 import Menu from './pages/Menu.jsx';
 import Drinks from './pages/Drinks.jsx';
 import Foods from './pages/Foods.jsx';
+// User Pages
+import SignIn from './pages/users/SignIn.jsx';
+import SignUp from './pages/users/SignUp.jsx';
+import AllUsers from './pages/users/AllUsers';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -15,6 +19,9 @@ const router = createBrowserRouter(
         <Route path="menu" element={<Menu />}/>
         <Route path="menu/drinks" element={<Drinks />}/>
         <Route path="menu/foods" element={<Foods />}/>
+        <Route path="signin" element={<SignIn />} />
+        <Route path="signup" element={<SignUp />} />
+        <Route path="users" element={<AllUsers />} />
     </Route>
   )
 )

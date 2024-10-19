@@ -55,7 +55,8 @@
         z-index: 99;
         &.open {
             @include displayFlex(column wrap, center, center);
-            animation: expandMenu 1.8s forwards;
+            animation: expandMenu 1s forwards;
+            // animation: expandMenu 1.8s forwards;
         }
         .tab {
             @include hoverPointer();

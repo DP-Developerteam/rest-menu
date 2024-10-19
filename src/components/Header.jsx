@@ -1,8 +1,9 @@
 import './_components.scss'; // Import styles
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
+//Import images/icons
 import Isologotipo from '../assets/img/ISOLOGOTIPO-DP-rest-menu.svg';
 import MenuIcon from '../assets/img/menu-icon.svg';
 import MenuOpenIcon from '../assets/img/menu-open-icon.svg';
@@ -11,6 +12,7 @@ import FlagSpain from '../assets/img/flag-spain.svg';
 import FlagGermany from '../assets/img/flag-germany.svg';
 
 function Header() {
+    //Translations variables and hooks
     const { t, i18n } = useTranslation();
     const languages = [
         { code: "en", name: "United Kingdom", flag: FlagUk },
@@ -18,6 +20,7 @@ function Header() {
         { code: "de", name: "German", flag: FlagGermany },
     ];
 
+    //Menu variables and functions
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -25,6 +28,28 @@ function Header() {
     const closeMenu = () => {
         setIsMenuOpen(false);
     };
+
+    //Users related variables, hooks and function
+    //Hook for navigation and location (URL)
+    const navigate = useNavigate();
+    const location = useLocation();
+    //Function to SignOut
+    const signOut = () => {
+        // Remove the token from local storage
+        localStorage.removeItem('token');
+        //Redirect to Signin
+        navigate('/signin');
+        //Close Menu
+        closeMenu();
+    }
+    // Variable to know if user is logged in or not. Used to render of the buttons.
+    const isLoggedIn = !!localStorage.getItem('token');
+    // Variables to know if page is SignIn or SignUp
+    const isOnSignInPage = location.pathname === '/signin';
+    const isOnSignUpPage = location.pathname === '/signup';
+
+
+
 
     return (
         <header className='header'>
@@ -37,6 +62,17 @@ function Header() {
             <nav className={`navContainer ${isMenuOpen ? 'open' : 'closed'}`}>
                 <NavLink className='tab' onClick={closeMenu} to='/'>{t('nav.home')}</NavLink>
                 <NavLink className='tab' onClick={closeMenu} to='/menu'>{t('nav.menu')}</NavLink>
+
+                {!isLoggedIn && !isOnSignInPage && (
+                    <NavLink className='tab' onClick={closeMenu} to='/signin'>{t('nav.signIn')}</NavLink>
+                )}
+                {!isLoggedIn && !isOnSignUpPage && (
+                    <NavLink className='tab' onClick={closeMenu} to='/signup'>{t('nav.signUp')}</NavLink>
+                )}
+                {isLoggedIn && (
+                    <p className='tab' onClick={signOut}>{t('nav.signOut')}</p>
+                )}
+
                 <div className='languagesBox'>
                     {languages.map(language => (
                         <button className='language' onClick={() => {i18n.changeLanguage(language.code);}} key={language.code}>

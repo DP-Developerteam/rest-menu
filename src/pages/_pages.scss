@@ -1,12 +1,106 @@
 @import '../App.scss';
 
 .page {
+    // page class layouts the entire page with column direction
     @include displayFlex(column nowrap, center, center);
     width: 100%;
     height: 100%;
-    .tab {
-        @include hoverPointer();
-        @include buttonBorder(transparent, $colorLightOne, $colorLightOne);
-        margin: 10px;
+
+    // Helper class btnExpand 150
+    .btnExpand150 {
+        ///btnExpand150 makes button full width and height 150
+        @include displayFlex(column nowrap, center, center);
+        width: 100%;
+        height: 150px;
     }
-} //page
+
+    .intro {
+        // Intro class contains an h1 element, p element and the class btnBack (button to go back)
+        @include displayFlex(column nowrap, center, flex-start);
+        padding: 0 10px;
+        margin: 50px 0;
+        p {
+            // p styles for paragraph in intro
+            margin-top: 20px;
+        }
+        .btnBack {
+            @include hoverPointer();
+            position: absolute;
+            top: 75px;
+            left: 15px;
+            color: $colorTertiary;
+        }
+    }
+
+    .tabsContainer {
+        //Container of Tabs. Inside we can find a class tab
+        @include displayFlex(column nowrap, center, center);
+        width: 100%;
+
+        .tab {
+            // Tab class contains p element with dinamic class and a dropMenu class
+            @include displayFlex(column nowrap, center, center);
+            @include hoverPointer();
+            width: 100%;
+            min-height: 150px;
+            &:nth-child(odd) {
+                // Alternate background colors for odd tabs
+                background-color: $colorDarkTwo;
+            }
+            &:nth-child(even) {
+                // Alternate background colors for even tabs
+                background-color: $colorDarkOne;
+            }
+
+            p.active {
+                // Style for active tab text (when it's clicked)
+                // @include displayFlex(column nowrap, center, center);
+                // width: 100%;
+                // min-height: 150px;
+                font-weight: bold;
+                color: $colorDarkOne;
+                background-color: $colorLightTwo;
+            }
+
+            .dropMenu {
+                // dropMenu is a containe for items.
+                display: none; // Hide menu initially
+                @include displayFlex(column nowrap, flex-start, flex-start);
+                width: 100%;
+                color: $colorDarkOne;
+                background-color: $colorLightOne;
+                padding: 20px;
+
+                .item {
+                    // Item class contains two classes: title and iconPrice
+                    @include displayFlex(row nowrap, space-between, flex-start);
+                    width: 100%;
+                    margin: 10px 0;
+
+                    .title {
+                        // Title or name of the producct
+                        @include displayFlex(row wrap, flex-start, flex-start);
+                        word-break: normal;
+                        flex-basis: 65%; // Take up most of the space for the title
+                    }
+
+                    .iconPrice {
+                        // iconPrice class contains two elements: icon and price
+                        @include displayFlex(row nowrap, space-between, flex-start);
+                        width: 120px;
+                        flex-grow: 1;
+
+                        .icon {
+                            margin: 0 10px;
+                        }
+                    }
+                }
+            }
+
+            &.open .dropMenu {
+                // When the tab has the 'open' class, show the element with class dropMenu
+                display: flex;
+            }
+        }
+    }
+}
