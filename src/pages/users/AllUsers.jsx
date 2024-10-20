@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getUsers } from '../../services/users/userService'; // Import the function to fetch users
+import { useSelector } from 'react-redux';
 
 const AllUsers = () => {
     // Array to store user data
@@ -8,13 +9,15 @@ const AllUsers = () => {
     const [loading, setLoading] = useState(true);
     // String to hold error messages
     const [error, setError] = useState(null);
+    // Access user role from Redux
+    const { token } = useSelector((state) => state.user);
 
     // useEffect hook to fetch users when the component mounts
     useEffect(() => {
         const fetchUsers = async () => {
             try {
                 // Call the getUsers function to retrieve user data
-                const usersData = await getUsers();
+                const usersData = await getUsers(token);
                 // Update the users state with the fetched data
                 setUsers(usersData);
             } catch (error) {
@@ -25,10 +28,9 @@ const AllUsers = () => {
                 setLoading(false);
             }
         };
-
         // Invoke the fetchUsers function to initiate data fetching
         fetchUsers();
-    }, []); // Empty dependency array means this runs once when the component mounts
+    }, [token]); // Empty dependency array means this runs once when the component mounts
 
     // Conditional rendering based on loading and error states
     if (loading) return <div>Loading...</div>; // Show loading message while data is being fetched

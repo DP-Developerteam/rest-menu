@@ -3,7 +3,10 @@
     "home": "Startseite",
     "menu": "Speisekarte",
     "food": "Essen",
-    "drinks": "Trinken"
+    "drinks": "Trinken",
+    "signIn": "Anmelden",
+    "signUp": "Registrieren",
+    "signOut": "Abmelden"
   },
   "home": {
     "intro": {

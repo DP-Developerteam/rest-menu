@@ -3,6 +3,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signinUser } from '../../../services/users/userService';
+import { getUserById } from '../../../services/users/userService';
+//REDUX imports
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../../store/userSlice';
 
 
 const SignInForm = () => {
@@ -12,6 +16,7 @@ const SignInForm = () => {
     });
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -23,16 +28,38 @@ const SignInForm = () => {
         setErrorMessage('');
 
         try {
-            const response = await signinUser(formData); // Call the signinUser function
-            console.log(response); // Logs the response with token and user data
-            console.log(formData); // Logs the submitted form data
+            // Call the signinUser function
+            const response = await signinUser(formData);
+            console.log('Sign-in response:', response);
 
-            // Check if a token exists in the response, which indicates successful sign-in
-            if (response.token) {
-                // Redirect to home or another page on successful sign-in
-                navigate('/users');
+            // Collect user Token
+            const userToken = response.token;
+            console.log('User Token:', userToken);
+
+            // Collect user ID
+            const userId = response._id;
+            console.log('User Id:', userId);
+
+            // Fetch user details including role
+            const userDetails = await getUserById(userId, userToken);
+            console.log('User details:', userDetails);
+
+            const userRole = userDetails.role;
+            console.log('User role:', userDetails);
+
+            if (userToken) {
+                // Set the user info using REDUX
+                dispatch(setUser({
+                    userId: userId,
+                    token: userToken,
+                    role: userRole
+                }));
+                //Conditional if to redirect based on role
+                navigate(userRole === 'employee' ? '/users' : '/');
             }
+
         } catch (error) {
+            console.error('Sign-in error:', error); // Log the entire error object
             setErrorMessage(error.response?.data?.message || 'An error occurred during sign in.');
         }
     };

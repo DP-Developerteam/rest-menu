@@ -1,6 +1,10 @@
 import './App.scss';
 import { createBrowserRouter, createRoutesFromElements, RouterProvider, Route } from 'react-router-dom';
 import RootLayout from './layout/RootLayout.jsx';
+//Redux
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from './store/store.js';
 //Pages
 import Home from './pages/Home.jsx';
 import Menu from './pages/Menu.jsx';
@@ -28,7 +32,11 @@ const router = createBrowserRouter(
 
 function App() {
   return (
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <RouterProvider router={router} />
+      </PersistGate>
+    </Provider>
   );
 }
 

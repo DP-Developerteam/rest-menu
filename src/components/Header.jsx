@@ -2,6 +2,9 @@ import './_components.scss'; // Import styles
 import React, { useState } from 'react';
 import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+// Import Redux hooks
+import { useSelector, useDispatch } from 'react-redux';
+import { clearUser } from '../store/userSlice';
 
 //Import images/icons
 import Isologotipo from '../assets/img/ISOLOGOTIPO-DP-rest-menu.svg';
@@ -33,17 +36,21 @@ function Header() {
     //Hook for navigation and location (URL)
     const navigate = useNavigate();
     const location = useLocation();
-    //Function to SignOut
+    // Initialize dispatch to update info of userSlice
+    const dispatch = useDispatch();
+
+    // Function to SignOut
     const signOut = () => {
-        // Remove the token from local storage
-        localStorage.removeItem('token');
-        //Redirect to Signin
+        // Clear user information from Redux
+        dispatch(clearUser());
+        // Redirect to SignIn
         navigate('/signin');
-        //Close Menu
+        // Close Menu
         closeMenu();
-    }
+    };
     // Variable to know if user is logged in or not. Used to render of the buttons.
-    const isLoggedIn = !!localStorage.getItem('token');
+    const { isLoggedIn } = useSelector((state) => state.user);
+
     // Variables to know if page is SignIn or SignUp
     const isOnSignInPage = location.pathname === '/signin';
     const isOnSignUpPage = location.pathname === '/signup';

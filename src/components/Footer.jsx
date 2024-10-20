@@ -2,6 +2,7 @@ import './_components.scss'; // Import styles
 import React, { useEffect, useState, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 
 import ArrowLeft from '../assets/img/arrow-left.svg';
 import ArrowRight from '../assets/img/arrow-right.svg';
@@ -10,6 +11,10 @@ import IconOrderList from '../assets/img/order-list.svg';
 
 function Footer() {
     const { t } = useTranslation();
+
+    // Access user role from Redux
+    const { role, isLoggedIn } = useSelector((state) => state.user);
+    console.log('Current User State:', role);
 
     const footerRef = useRef(null);
     const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -56,13 +61,12 @@ function Footer() {
                 |
                 <NavLink className='tab' to='/menu'>{t('nav.menu')}</NavLink>
                 |
-                {/* <NavLink className='tab' to='/menu/foods'>{t('nav.food')}</NavLink>
-                |
-                <NavLink className='tab' to='/menu/drinks'>{t('nav.drinks')}</NavLink>
-                | */}
                 <NavLink className='tab' to='/menu/drinks'>
                     <img className='icon' src={IconOrderList} alt='Order list icon'/>
                 </NavLink>
+                {isLoggedIn && role === 'employee' && (
+                    <NavLink className='tab' to='/users'>{t('nav.user')}</NavLink>
+                )}
             </footer>
             {canScrollRight && <button className="scrollButton" onClick={() => scrollFooter('right')}>
                 <img className='arrow' src={ArrowRight} alt='arrow'/>

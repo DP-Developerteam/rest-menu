@@ -3,7 +3,10 @@
     "home": "Inicio",
     "menu": "Carta",
     "food": "Comida",
-    "drinks": "Bebidas"
+    "drinks": "Bebidas",
+    "signIn": "Iniciar sesión",
+    "signUp": "Registrarse",
+    "signOut": "Cerrar sesión"
   },
   "home": {
     "intro": {
