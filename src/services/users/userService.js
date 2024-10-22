@@ -30,19 +30,16 @@ export const signinUser = async (credentials) => {
         // Send a POST request to the sign-in endpoint with user credentials
         const response = await api.post(`${API_URL}/signin`, credentials);
 
-        // // Check if the response contains a token and save it to local storage
-        // if (response.data && response.data.token) {
-        //     localStorage.setItem('token', response.data.token); // Save the token to local storage
-        // } else {
-        //     console.error('No token found in response');
-        // }
-
-        // Return the response data (excluding the token if you want)
-        console.log('API Response:', response.data); // Add this line
-        return response.data;
+        // return response.data;
+        return {
+            token: response.data.token,
+            _id: response.data._id,
+            role: response.data.role,
+            expiresIn: response.data.expiresIn
+        };
     } catch (error) {
         console.error('Error signing in:', error);
-        throw error; // Propagate the error to the calling function for further handling
+        throw error;
     }
 };
 
@@ -51,7 +48,8 @@ export const getUsers = async (userToken) => {
     // Make an API call to fetch all users
     const response = await api.get(API_URL, {
         headers: {
-            Authorization: `Bearer ${userToken}` // Include the token in the header
+            // Include the token in the header
+            Authorization: `Bearer ${userToken}`
         }
     });
     // Return the data received from the API
@@ -73,5 +71,18 @@ export const getUserById = async (userId, userToken) => {
     }
 };
 
-
-// Additional user-related functions can be added here
+// DELETE USER - Function to delete a user by ID
+export const deleteUser = async (userId, userToken) => {
+    console.log(userId);
+    try {
+        const response = await api.delete(`${API_URL}/delete/${userId}`, {
+            headers: {
+                Authorization: `Bearer ${userToken}`, // Incluye el token en el encabezado
+            }
+        });
+        return response.data; // Devuelve los datos del usuario eliminado
+    } catch (error) {
+        console.error('Error deleting user:', error);
+        throw error; // Propaga el error para manejarlo en el llamador
+    }
+};

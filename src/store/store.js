@@ -1,11 +1,15 @@
 // Importing the createStore function from Redux to create a Redux store
-import { createStore } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
 // Importing persistStore and persistReducer from redux-persist for state persistence across sessions
 import { persistStore, persistReducer } from 'redux-persist';
 // Importing the default storage engine from redux-persist, which uses localStorage for web applications
 import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
 // Importing the rootReducer which combines all the individual reducers for the Redux store
-import rootReducer from './reducers'; // Import your root reducer
+import rootReducer from './reducers';
+// Importing thunk
+import { thunk } from 'redux-thunk';
+
+
 
 // Configuration object for redux-persist
 const persistConfig = {
@@ -18,7 +22,16 @@ const persistConfig = {
 // Creating a persisted reducer using the rootReducer and the persistConfig
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-// Creating the Redux store with the persisted reducer
-export const store = createStore(persistedReducer);
+// Configure the store using Redux Toolkit
+export const store = configureStore({
+    reducer: persistedReducer,
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: {
+                ignoredActions: ['persist/PERSIST'],
+            },
+        }).concat(thunk) // Add thunk middleware
+});
+
 // Creating the persistor, which will manage the persistence of the Redux store
 export const persistor = persistStore(store);

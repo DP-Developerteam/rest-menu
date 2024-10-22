@@ -11,7 +11,7 @@ const SignUpForm = () => {
         name: '',
         username: '',
         password: '',
-        role: 'client', // Default role
+        role: 'client',
     });
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
@@ -19,7 +19,6 @@ const SignUpForm = () => {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
-        // console.log(formData)
     };
 
     const handleSubmit = async (e) => {
@@ -27,7 +26,8 @@ const SignUpForm = () => {
         setErrorMessage('');
 
         try {
-            const response = await signupUser(formData); // Directly calling signupUser
+            // Directly calling signupUser
+            const response = await signupUser(formData);
             // Assuming the successful response has a specific structure, e.g. a message or user object
             if (response && response.message) { // Check if response has a message property
                 navigate('/signin'); // Navigate on successful sign-up

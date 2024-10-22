@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getUsers } from '../../services/users/userService'; // Import the function to fetch users
+import { getUsers, deleteUser } from '../../services/users/userService'; // Import the function to fetch users
 import { useSelector } from 'react-redux';
 
 const AllUsers = () => {
@@ -11,6 +11,7 @@ const AllUsers = () => {
     const [error, setError] = useState(null);
     // Access user role from Redux
     const { token } = useSelector((state) => state.user);
+    // console.log('Role en AllUsers: ', role);
 
     // useEffect hook to fetch users when the component mounts
     useEffect(() => {
@@ -30,7 +31,19 @@ const AllUsers = () => {
         };
         // Invoke the fetchUsers function to initiate data fetching
         fetchUsers();
-    }, [token]); // Empty dependency array means this runs once when the component mounts
+    }, [token]);
+
+    const handleDeleteUser = async (userId) => {
+        console.log("This user ID: ", userId)
+        try {
+            const deletedUser = await deleteUser(userId, token);
+            // Update the users state to reflect the deletion
+            setUsers((prevUsers) => prevUsers.filter(user => user._id !== deletedUser._id));
+            alert('User deleted successfully.');
+        } catch (error) {
+            alert('Failed to delete user: ' + error.response?.data.message || 'An error occurred.');
+        }
+    };
 
     // Conditional rendering based on loading and error states
     if (loading) return <div>Loading...</div>; // Show loading message while data is being fetched
@@ -43,7 +56,10 @@ const AllUsers = () => {
             {users.length > 0 ? (
                 <ul>
                     {users.map(user => (
-                        <li key={user._id}>{user.name} - {user.username}</li> // Display each user's username
+                        <li key={user._id}>
+                            {user.name} - {user.username}
+                            <button onClick={() => handleDeleteUser(user._id)}>Delete</button> {/* Button to delete user */}
+                        </li>
                     ))}
                 </ul>
             ) : (

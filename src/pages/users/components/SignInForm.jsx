@@ -2,11 +2,9 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { signinUser } from '../../../services/users/userService';
-import { getUserById } from '../../../services/users/userService';
 //REDUX imports
 import { useDispatch } from 'react-redux';
-import { setUser } from '../../../store/userSlice';
+import { clearUser, signInThunk } from '../../../store/userSlice';
 
 
 const SignInForm = () => {
@@ -28,34 +26,33 @@ const SignInForm = () => {
         setErrorMessage('');
 
         try {
-            // Call the signinUser function
-            const response = await signinUser(formData);
-            console.log('Sign-in response:', response);
+            // Dispatch the loginUser thunk action
+            const action = await dispatch(signInThunk(formData)).unwrap();
 
-            // Collect user Token
-            const userToken = response.token;
-            console.log('User Token:', userToken);
-
-            // Collect user ID
-            const userId = response._id;
-            console.log('User Id:', userId);
-
-            // Fetch user details including role
-            const userDetails = await getUserById(userId, userToken);
-            console.log('User details:', userDetails);
-
-            const userRole = userDetails.role;
-            console.log('User role:', userDetails);
+            // Variables to manage the SignIn
+            const userToken = action.token;
+            const userRole = action.role;
+            const expiresIn = action.expiresIn * 1000;
+            const alertExpires = expiresIn - 20000;
 
             if (userToken) {
-                // Set the user info using REDUX
-                dispatch(setUser({
-                    userId: userId,
-                    token: userToken,
-                    role: userRole
-                }));
-                //Conditional if to redirect based on role
+
+                //Conditional to redirect based on role after login
                 navigate(userRole === 'employee' ? '/users' : '/');
+
+                setTimeout(() => {
+                    // TODOS ************
+                    // Create a popup to cancel the auto SignOut
+                    alert('In 20 seconds you will be automatically logout.');
+                }, alertExpires); // Call this after the expiration time
+
+                setTimeout(() => {
+                    // Clear user when token expires
+                    dispatch(clearUser());
+                    // After cleaning the user data. Redirect to homepage
+                    navigate('/');
+                }, expiresIn); // Call this after the expiration time
+
             }
 
         } catch (error) {
