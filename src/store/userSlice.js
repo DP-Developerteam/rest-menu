@@ -1,7 +1,7 @@
 // Importing createSlice from Redux Toolkit to create a slice of the Redux store
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 // Import the signin function from the userService
-import { signinUser } from '../services/users/userService';
+import { signinUser, getUserById } from '../services/users/userService';
 
 // Create an async thunk for SignIn
 export const signInThunk = createAsyncThunk(
@@ -16,6 +16,19 @@ export const signInThunk = createAsyncThunk(
             tokenExpiryTime: response.expiresIn * 1000 // Set expiry time in milliseconds
         }));
         return response;
+    }
+);
+
+// Create an async thunk to fetch a user by ID
+export const fetchUserById = createAsyncThunk(
+    'user/fetchUserById',
+    async ({ userId, token }, { rejectWithValue }) => {
+        try {
+            const response = await getUserById(userId, token);
+            return response; // Return the user data
+        } catch (error) {
+            return rejectWithValue(error.response?.data?.message || 'Error fetching user by ID');
+        }
     }
 );
 
@@ -66,6 +79,12 @@ const userSlice = createSlice({
                 state.error = null; // Clear error
             })
             .addCase(signInThunk.rejected, (state, action) => {
+                state.error = action.error.message;
+            })
+            .addCase(fetchUserById.fulfilled, (state, action) => {
+                state.currentUser = action.payload; // Ensure user is saved here
+            })
+            .addCase(fetchUserById.rejected, (state, action) => {
                 state.error = action.error.message;
             });
     }

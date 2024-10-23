@@ -36,19 +36,19 @@ function Header() {
     //Hook for navigation and location (URL)
     const navigate = useNavigate();
     const location = useLocation();
-    // Initialize dispatch to update info of userSlice
+    // REDUX Initialize dispatch to update info of userSlice
     const dispatch = useDispatch();
 
     // Function to SignOut
     const signOut = () => {
         // Clear user information from Redux
         dispatch(clearUser());
-        // Redirect to SignIn
-        navigate('/signin');
         // Close Menu
         closeMenu();
+        // Redirect to SignIn
+        navigate('/signin');
     };
-    // Variable to know if user is logged in or not. Used to render of the buttons.
+    // REDUX Variable to know if user is logged in or not. Used to render of the buttons.
     const { isLoggedIn } = useSelector((state) => state.user);
 
     // Variables to know if page is SignIn or SignUp

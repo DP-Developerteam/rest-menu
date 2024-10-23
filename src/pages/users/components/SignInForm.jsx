@@ -33,24 +33,23 @@ const SignInForm = () => {
             const userToken = action.token;
             const userRole = action.role;
             const expiresIn = action.expiresIn * 1000;
-            const alertExpires = expiresIn - 20000;
+            // const alertExpires = expiresIn - 20; // alert pop ups when there are 20 seconds for the auto signOut
 
             if (userToken) {
 
                 //Conditional to redirect based on role after login
                 navigate(userRole === 'employee' ? '/users' : '/');
 
-                setTimeout(() => {
-                    // TODOS ************
-                    // Create a popup to cancel the auto SignOut
-                    alert('In 20 seconds you will be automatically logout.');
-                }, alertExpires); // Call this after the expiration time
+                // setTimeout(() => {
+                //     // ToDo ************ Create a popup to cancel the auto SignOut
+                //     alert('In 20 seconds you will be automatically logout.');
+                // }, alertExpires); // Call this after the expiration time
 
                 setTimeout(() => {
+                    // Redirect to homepage
+                    navigate('/');
                     // Clear user when token expires
                     dispatch(clearUser());
-                    // After cleaning the user data. Redirect to homepage
-                    navigate('/');
                 }, expiresIn); // Call this after the expiration time
 
             }

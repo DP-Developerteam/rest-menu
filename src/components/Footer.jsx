@@ -9,12 +9,13 @@ import ArrowRight from '../assets/img/arrow-right.svg';
 import IconHomepage from '../assets/img/home.svg';
 import IconOrderList from '../assets/img/order-list.svg';
 
+
 function Footer() {
     const { t } = useTranslation();
 
     // Access user role from Redux
     const { role, isLoggedIn } = useSelector((state) => state.user);
-    console.log('Current User State:', role);
+    // console.log('Current User State:', role);
 
     const footerRef = useRef(null);
     const [canScrollLeft, setCanScrollLeft] = useState(false);

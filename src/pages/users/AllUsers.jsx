@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getUsers, deleteUser } from '../../services/users/userService'; // Import the function to fetch users
 import { useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
 const AllUsers = () => {
     // Array to store user data
@@ -8,10 +9,10 @@ const AllUsers = () => {
     // Boolean to indicate loading state
     const [loading, setLoading] = useState(true);
     // String to hold error messages
-    const [error, setError] = useState(null);
+    // const [error, setError] = useState(null);
+    const [errorMessage, setErrorMessage] = useState('');
     // Access user role from Redux
     const { token } = useSelector((state) => state.user);
-    // console.log('Role en AllUsers: ', role);
 
     // useEffect hook to fetch users when the component mounts
     useEffect(() => {
@@ -23,7 +24,7 @@ const AllUsers = () => {
                 setUsers(usersData);
             } catch (error) {
                 // Set the error state with a relevant message, falling back to a default
-                setError(error.response?.data.message || "Failed to load users.");
+                setErrorMessage(error.response?.data.message || "Failed to load users.");
             } finally {
                 // Set loading to false after the fetch attempt (successful or failed)
                 setLoading(false);
@@ -34,38 +35,44 @@ const AllUsers = () => {
     }, [token]);
 
     const handleDeleteUser = async (userId) => {
-        console.log("This user ID: ", userId)
+        // *** ToDos ------> Create a popup to confirm delete user.
         try {
             const deletedUser = await deleteUser(userId, token);
             // Update the users state to reflect the deletion
             setUsers((prevUsers) => prevUsers.filter(user => user._id !== deletedUser._id));
-            alert('User deleted successfully.');
         } catch (error) {
-            alert('Failed to delete user: ' + error.response?.data.message || 'An error occurred.');
+                // Set the error state with a relevant message, falling back to a default
+            setErrorMessage(error.response?.data?.message || 'Failed to delete users.');
         }
     };
 
     // Conditional rendering based on loading and error states
-    if (loading) return <div>Loading...</div>; // Show loading message while data is being fetched
-    if (error) return <div>{error}</div>; // Display error message if fetching failed
+    // Show loading message while data is being fetched
+    if (loading) return <div>Loading...</div>;
+    // Display error message if fetching failed
+    if (errorMessage) return <div>{errorMessage}</div>;
 
     // Render the list of users or a message if no users are found
     return (
         <div>
-            <h1>All Users</h1>
-            {users.length > 0 ? (
-                <ul>
-                    {users.map(user => (
-                        <li key={user._id}>
-                            {user.name} - {user.username}
-                            <button onClick={() => handleDeleteUser(user._id)}>Delete</button> {/* Button to delete user */}
-                        </li>
-                    ))}
-                </ul>
-            ) : (
-                <p>No users found.</p> // Message if there are no users
-            )}
-        </div>
+        <h1>All Users</h1>
+        {users.length > 0 ? (
+            <ul>
+                {users.map(user => (
+                    <li key={user._id}>
+                        <p>*********</p>
+                        <p>{user.name} - {user.username}</p>
+                        <p>{user.role}</p>
+                        <p><button onClick={() => handleDeleteUser(user._id)}>Delete</button></p>
+                        <p><NavLink to={`/users/edit/${user._id}`}>Edit</NavLink></p>
+                        <p>***</p>
+                    </li>
+                ))}
+            </ul>
+        ) : (
+            <p>No users found.</p>
+        )}
+    </div>
     );
 };
 

@@ -14,6 +14,7 @@ import Foods from './pages/Foods.jsx';
 import SignIn from './pages/users/SignIn.jsx';
 import SignUp from './pages/users/SignUp.jsx';
 import AllUsers from './pages/users/AllUsers';
+import UserEditForm from './pages/users/components/UserEditForm.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -26,6 +27,7 @@ const router = createBrowserRouter(
         <Route path="signin" element={<SignIn />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="users" element={<AllUsers />} />
+        <Route path="/users/edit/:id" element={<UserEditForm />} />
     </Route>
   )
 )
