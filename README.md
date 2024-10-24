@@ -1,3 +1,9 @@
+### ToDos ###
+- Create User while being already signed in. Let's say that an user wants to create another user. From AllUser.jsx there should be a button that redirects to SignUp.jsx
+- Start giving styles to the USERs CRUD.
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
