@@ -1,4 +1,7 @@
-@import '../App.scss';
+@import './colors.scss';
+@import './fonts.scss';
+@import './general.scss';
+@import './helpers.scss';
 
 .page {
     // page class layouts the entire page with column direction
@@ -43,6 +46,7 @@
             @include hoverPointer();
             width: 100%;
             min-height: 150px;
+            color: $color-light;
             &:nth-child(odd) {
                 // Alternate background colors for odd tabs
                 background-color: $colorDarkTwo;
@@ -54,9 +58,6 @@
 
             p.active {
                 // Style for active tab text (when it's clicked)
-                // @include displayFlex(column nowrap, center, center);
-                // width: 100%;
-                // min-height: 150px;
                 font-weight: bold;
                 color: $colorDarkOne;
                 background-color: $colorLightTwo;

@@ -1,7 +1,7 @@
-// src/pages/users/SignIn.jsx
-
+// Import styles and libraries
+import '../../../App.scss';
 import React from 'react';
-import SignInForm from './components/SignInForm';
+import SignInForm from '../components/SignInForm';
 
 const SignIn = () => {
     return (

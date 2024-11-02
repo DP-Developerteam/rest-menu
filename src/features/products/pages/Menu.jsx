@@ -1,4 +1,5 @@
-import './_pages.scss'; // Import styles
+// Import styles and libraries
+import '../../../App.scss';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';

@@ -1,8 +1,8 @@
 // import React from 'react'
 import { Outlet } from 'react-router-dom';
 
-import ScrollToTop from '../components/ScrollToTop';
-import BackTopButton from '../components/BackTopButton';
+// import components
+import { ScrollToTop, BackTopButton } from '../components/Common';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 

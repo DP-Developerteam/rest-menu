@@ -2,15 +2,15 @@
 @import './styles/fonts.scss';
 @import './styles/general.scss';
 @import './styles/helpers.scss';
+@import './styles/pages.scss';
 
 body{
-    background: $colorDarkOne;
-    @include font(1rem, 400, $colorLightOne);
+    background: $color-background;
+    @include font(1rem, 400, $color-text-primary);
     text-transform: uppercase;
 }
 .contentDP {
     @include displayFlex(column nowrap, center, center);
     padding: 70px 0px 60px;
-    // padding: 70px 10px 70px;
     min-height: 100dvh;
 }

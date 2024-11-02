@@ -1,9 +1,9 @@
-// src/pages/users/components/SignUpForm.jsx
-
+// Import styles and libraries
+import '../../../App.scss';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import apiUser from '../../../services/users/userService'; // Update the path according to your structure
-import { signupUser } from '../../../services/users/userService';
+//Import functions
+import { signupUser } from '../userService';
 
 
 const SignUpForm = () => {

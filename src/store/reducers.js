@@ -1,7 +1,7 @@
 // Importing the combineReducers function from Redux to combine multiple reducers into one
 import { combineReducers } from 'redux';
 // Importing the userReducer which manages the user-related state from userSlice
-import userReducer from './userSlice';
+import userReducer from '../features/users/userSlice';
 
 // Combining the userReducer into a rootReducer to manage the global state
 const rootReducer = combineReducers({

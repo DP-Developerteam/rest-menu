@@ -1,10 +1,10 @@
-// src/pages/users/components/SignInForm.jsx
-
+// Import styles and libraries
+import '../../../App.scss';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 //REDUX imports
 import { useDispatch } from 'react-redux';
-import { clearUser, signInThunk } from '../../../store/userSlice';
+import { clearUser, signInThunk } from '../userSlice';
 
 
 const SignInForm = () => {

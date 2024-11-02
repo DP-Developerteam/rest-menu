@@ -6,15 +6,15 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './store/store.js';
 //Pages
-import Home from './pages/Home.jsx';
-import Menu from './pages/Menu.jsx';
-import Drinks from './pages/Drinks.jsx';
-import Foods from './pages/Foods.jsx';
+import Home from './components/pages/Home.jsx';
+import Menu from './features/products/pages/Menu.jsx';
+import Drinks from './features/products/pages/Drinks.jsx';
+import Foods from './features/products/pages/Foods.jsx';
 // User Pages
-import SignIn from './pages/users/SignIn.jsx';
-import SignUp from './pages/users/SignUp.jsx';
-import AllUsers from './pages/users/AllUsers';
-import UserEditForm from './pages/users/components/UserEditForm.jsx';
+import SignIn from './features/users/pages/SignIn.jsx';
+import SignUp from './features/users/pages/SignUp.jsx';
+import AllUsers from './features/users/pages/AllUsers';
+import UserEditForm from './features/users/components/UserEditForm.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(

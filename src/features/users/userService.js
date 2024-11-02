@@ -1,11 +1,10 @@
-
 //Import api.js
 import api from '../api';
 // Add users path for the API
 const API_URL = '/users';
 
 // SIGNOUT logic is managed with Redux.
-// /src/store/userSlicce.js -> function clearUser()
+// /src/features/users/userSlicce.js -> function clearUser()
 
 // SIGNUP - Function to sign up a new user
 export const signupUser = async (userData) => {
@@ -46,7 +45,7 @@ export const signinUser = async (credentials) => {
 export const getUsers = async (userToken) => {
     try {
         // Make an API call to fetch all users
-        const response = await api.get(API_URL, {
+        const response = await api.get(`${API_URL}/`, {
             headers: {
                 // Include the token in the header
                 Authorization: `Bearer ${userToken}`

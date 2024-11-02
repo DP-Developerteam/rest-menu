@@ -1,4 +1,4 @@
-import './_pages.scss'; // Import styles
+import '../../App.scss'; // Import styles
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 

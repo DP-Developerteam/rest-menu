@@ -1,7 +1,10 @@
+// Import styles and libraries
+import '../../../App.scss';
 import React, { useEffect, useState } from 'react';
-import { getUsers, deleteUser } from '../../services/users/userService'; // Import the function to fetch users
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+// Import the function to fetch users
+import { getUsers, deleteUser } from '../userService';
 
 const AllUsers = () => {
     // Array to store user data

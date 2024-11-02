@@ -1,7 +1,9 @@
 // Importing createSlice from Redux Toolkit to create a slice of the Redux store
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 // Import the signin function from the userService
-import { signinUser, getUserById } from '../services/users/userService';
+import { signinUser, getUserById } from './userService';
+// Imports Auth Bearing for Axios
+import { setAuthToken } from '../api';
 
 // Create an async thunk for SignIn
 export const signInThunk = createAsyncThunk(
@@ -20,7 +22,7 @@ export const signInThunk = createAsyncThunk(
 );
 
 // Create an async thunk to fetch a user by ID
-export const fetchUserById = createAsyncThunk(
+export const userByIdThunk = createAsyncThunk(
     'user/fetchUserById',
     async ({ userId, token }, { rejectWithValue }) => {
         try {
@@ -54,6 +56,8 @@ const userSlice = createSlice({
             state.role = action.payload.role;
             state.isLoggedIn = true; // Setting the logged-in flag to true
             state.tokenExpiryTime = action.payload.expiresIn * 1000; // Set expiry time in milliseconds
+            // Set token in Axios using api.js
+            setAuthToken(action.payload.token);
         },
         // Action to clear user data from the state
         clearUser: (state) => {
@@ -63,6 +67,8 @@ const userSlice = createSlice({
             state.role = null;
             state.isLoggedIn = false; // Setting the logged-in flag to false
             state.tokenExpiryTime = null; // Clear token expiration
+            // Clear token in Axios using api.js
+            setAuthToken(null);
         },
     },
     // Handle async actions in extraReducers
@@ -81,10 +87,10 @@ const userSlice = createSlice({
             .addCase(signInThunk.rejected, (state, action) => {
                 state.error = action.error.message;
             })
-            .addCase(fetchUserById.fulfilled, (state, action) => {
+            .addCase(userByIdThunk.fulfilled, (state, action) => {
                 state.currentUser = action.payload; // Ensure user is saved here
             })
-            .addCase(fetchUserById.rejected, (state, action) => {
+            .addCase(userByIdThunk.rejected, (state, action) => {
                 state.error = action.error.message;
             });
     }

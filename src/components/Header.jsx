@@ -1,11 +1,11 @@
-import './_components.scss'; // Import styles
+// Import styles and libraries
+import './__components.scss';
 import React, { useState } from 'react';
 import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 // Import Redux hooks
 import { useSelector, useDispatch } from 'react-redux';
-import { clearUser } from '../store/userSlice';
-
+import { clearUser } from '../features/users/userSlice';
 //Import images/icons
 import Isologotipo from '../assets/img/ISOLOGOTIPO-DP-rest-menu.svg';
 import MenuIcon from '../assets/img/menu-icon.svg';

@@ -1,9 +1,10 @@
-import './_components.scss'; // Import styles
+// Import styles and libraries
+import './__components.scss';
 import React, { useEffect, useState, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-
+//Import images
 import ArrowLeft from '../assets/img/arrow-left.svg';
 import ArrowRight from '../assets/img/arrow-right.svg';
 import IconHomepage from '../assets/img/home.svg';

@@ -1,11 +1,15 @@
+// Import styles and libraries
+import '../../../App.scss';
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom'; // Import useParams to access the userId
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUserById } from '../../../store/userSlice'; // Import the thunk for fetching user by ID
-import { editUser } from '../../../services/users/userService'; // Import the editUser service
+//Import functions
+import { userByIdThunk } from '../userSlice';
+import { editUser } from '../userService';
 
 const UserEditForm = () => {
-    const { id } = useParams(); // Get the user ID from the URL
+    // Get the user ID from the URL
+    const { id } = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { token, currentUser, error } = useSelector((state) => state.user); // Get token and current user
@@ -20,7 +24,7 @@ const UserEditForm = () => {
     // Fetch user details when the component mounts
     useEffect(() => {
         if (id && token) {
-            dispatch(fetchUserById({ userId: id, token })); // Fetch user by ID
+            dispatch(userByIdThunk({ userId: id, token })); // Fetch user by ID
         }
     }, [dispatch, id, token]);
 

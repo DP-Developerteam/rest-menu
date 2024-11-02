@@ -1,9 +1,3 @@
-### ToDos ###
-- Create User while being already signed in. Let's say that an user wants to create another user. From AllUser.jsx there should be a button that redirects to SignUp.jsx
-- Start giving styles to the USERs CRUD.
-
-
-### Folder Structure ###z
 rest-menu/
 └── public/                           // Static files like favicon and HTML file
 │   └── favicon.ico                   // Favicon for the application
@@ -70,5 +64,7 @@ rest-menu/
 │   └── App.scss                      // Main styles for the application
 │   └── index.css                     // Global CSS styles
 │   └── index.js                      // Entry point for the React application
+└── .gitignore                        // Git ignore file
+└── package-lock.json                 // Lock file for package dependencies
 └── package.json                      // Package configuration file
 └── README.md                         // Documentation for the project
